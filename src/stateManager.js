@@ -1,4 +1,5 @@
 import Player from './player.js';
+import Ammo from './ammo.js';
 
 class StateManager {
   constructor(canvas) {
@@ -6,6 +7,11 @@ class StateManager {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     this.player = new Player(this);
+
+    this.availableAmmoPool = [];
+    this.maxAmmo = 15;
+    this.createAmmoPool();
+
     this.activeKeys = [];
 
     // keyboard event listeners
@@ -16,6 +22,11 @@ class StateManager {
       if (!this.activeKeys.includes(e.key)) {
         this.activeKeys.push(e.key);
       }
+
+      // Shoot ammo if available
+      if (e.key === 'w') {
+        this.player.fireAmmo();
+      }
     })
 
     // remove key from the active key list when key is no longer pressed
@@ -24,9 +35,23 @@ class StateManager {
     })
   }
 
+  createAmmoPool() {
+    for (let index = 0; index < this.maxAmmo; index++) {
+      this.availableAmmoPool.push(new Ammo(this));
+    }
+  }
+
+  getAmmoFromPool() {
+    return this.availableAmmoPool.find((ammo) => ammo.free);
+  }
+
   render(context) {
     this.player.render(context);
     this.player.update();
+    this.availableAmmoPool.forEach(ammo => {
+      ammo.progress()
+      ammo.render(context)
+    })
   }
 }
 
