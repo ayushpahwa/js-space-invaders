@@ -31,10 +31,17 @@ class Player {
     }
 
     // Adding horizontal boundaries
-    if (this.x < 0) {
-      this.x = 0;
-    } else if (this.x > this.stateManager.width - this.width) {
-      this.x = this.stateManager.width - this.width;
+    if (this.x < -this.width * 0.5) {
+      this.x = 0 - this.width * 0.5;
+    } else if (this.x > this.stateManager.width - this.width * 0.5) {
+      this.x = this.stateManager.width - this.width * 0.5;
+    }
+  }
+
+  fireAmmo() {
+    const ammo = this.stateManager.getAmmoFromPool();
+    if (ammo) {
+      ammo.fire(this.x + this.width * 0.5, this.y);
     }
   }
 }
