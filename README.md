@@ -1,1 +1,1 @@
-# js-space-invaders
+# space-invaders
