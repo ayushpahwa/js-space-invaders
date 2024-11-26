@@ -16,8 +16,10 @@ class StateManager {
 
     // keyboard event listeners
 
-    // when key is pushed down, it is added to active key list 
-    // we also need to make sure no duplicate keys are present
+    // when key is pushed down and it is not already present in the active key list
+    // it is added to active key list
+    // This is done because if you hold down the key, then it will keep firing the 
+    // same keydown event for the key which we don't want
     window.addEventListener('keydown', (e) => {
       if (!this.activeKeys.includes(e.key)) {
         this.activeKeys.push(e.key);
