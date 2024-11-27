@@ -9,6 +9,7 @@ window.addEventListener("load", function() {
   const ctx = canvas.getContext("2d");
   canvas.width = 600;
   canvas.height = 800;
+  ctx.fillStyle = "white";
 
   const stateManager = new StateManager(canvas);
 
