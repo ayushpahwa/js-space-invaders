@@ -51,8 +51,5 @@ class Raid {
       enemy.render(context);
     })
   }
-
-  progress() {
-  }
 }
 export default Raid;

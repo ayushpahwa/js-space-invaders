@@ -67,9 +67,8 @@ class StateManager {
       ammo.progress()
       ammo.render(context)
     })
-    this.raids.forEach(wave => {
-      wave.progress();
-      wave.render(context);
+    this.raids.forEach(raid => {
+      raid.render(context);
     })
   }
 }
