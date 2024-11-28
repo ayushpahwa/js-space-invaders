@@ -1,5 +1,6 @@
 import Player from './player.js';
 import Ammo from './ammo.js';
+import Raid from './raid.js';
 
 class StateManager {
   constructor(canvas) {
@@ -8,13 +9,21 @@ class StateManager {
     this.height = this.canvas.height;
     this.player = new Player(this);
 
+    // Ammunition pool
     this.availableAmmoPool = [];
     this.maxAmmo = 15;
     this.createAmmoPool();
 
-    this.activeKeys = [];
+    // Enemy wave control
+    this.enemySize = 60;
+    this.enemyRaidGridColumns = 3;
+    this.enemyRaidGridRows = 3;
+
+    this.raids = [];
+    this.startEnemyRaid();
 
     // keyboard event listeners
+    this.activeKeys = [];
 
     // when key is pushed down and it is not already present in the active key list
     // it is added to active key list
@@ -47,12 +56,20 @@ class StateManager {
     return this.availableAmmoPool.find((ammo) => ammo.free);
   }
 
+  startEnemyRaid() {
+    this.raids.push(new Raid(this));
+  }
+
   render(context) {
     this.player.render(context);
     this.player.update();
     this.availableAmmoPool.forEach(ammo => {
       ammo.progress()
       ammo.render(context)
+    })
+    this.raids.forEach(wave => {
+      wave.progress();
+      wave.render(context);
     })
   }
 }
