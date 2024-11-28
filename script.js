@@ -10,6 +10,8 @@ window.addEventListener("load", function() {
   canvas.width = 600;
   canvas.height = 800;
   ctx.fillStyle = "white";
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 5;
 
   const stateManager = new StateManager(canvas);
 
