@@ -30,8 +30,7 @@ class Enemy {
       this.stateManager.gameOver = true;
     }
 
-    // if the game is still going, check for enemy collisions
-    // with player and active ammunitions
+    // if the game is still going, check for enemy collisions active ammunitions
     if (!this.stateManager.gameOver) {
       // check for collisions
       this.stateManager.availableAmmoPool.forEach(ammo => {
@@ -43,11 +42,12 @@ class Enemy {
         }
       })
 
-      // check if enemy hit the player
-      if (this.stateManager.checkEnemyCollision(this, this.stateManager.player)) {
-        this.stateManager.playerLives--;
-        this.hitCounter++;
-      }
+    }
+
+    // check if enemy hit the player
+    if (this.stateManager.checkEnemyCollision(this, this.stateManager.player)) {
+      this.stateManager.playerLives--;
+      this.hitCounter++;
     }
   }
 }
