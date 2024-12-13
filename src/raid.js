@@ -16,6 +16,7 @@ class Raid {
 
     this.enemies = [];
     this.createEnemyRaid();
+    this.destroyed = false;
   }
 
   createEnemyRaid() {
@@ -27,6 +28,9 @@ class Raid {
   }
 
   render(context) {
+    if (this.enemies.length <= 0) {
+      return;
+    }
     if (this.raidPosY < 0) {
       // if the raid has just spawned above the screen, float it down
       this.speedY = 5;
@@ -52,7 +56,7 @@ class Raid {
     })
 
     // check if the enemy is shot
-    this.enemies = this.enemies.filter(enemy => !enemy.hitByAmmo);
+    this.enemies = this.enemies.filter(enemy => enemy.hitCounter < enemy.healthPoints);
   }
 }
 export default Raid;
