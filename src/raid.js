@@ -50,6 +50,9 @@ class Raid {
       enemy.progress(this.raidPosX, this.raidPosY);
       enemy.render(context);
     })
+
+    // check if the enemy is shot
+    this.enemies = this.enemies.filter(enemy => !enemy.hitByAmmo);
   }
 }
 export default Raid;
