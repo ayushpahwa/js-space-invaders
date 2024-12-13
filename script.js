@@ -12,6 +12,7 @@ window.addEventListener("load", function() {
   ctx.fillStyle = "white";
   ctx.strokeStyle = "white";
   ctx.lineWidth = 5;
+  ctx.font = "20px Impact";
 
   const stateManager = new StateManager(canvas);
 
