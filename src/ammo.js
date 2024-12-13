@@ -4,7 +4,7 @@ class Ammo {
     this.height = 20;
     this.x = 0;
     this.y = 0;
-    this.speed = 20;
+    this.speed = 30;
     this.free = true;
     this.stateManager = stateManager;
   }
