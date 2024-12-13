@@ -4,13 +4,22 @@ class Player {
     this.stateManager = stateManager;
     this.width = 100;
     this.height = 100;
+    this.speed = 5;
+
+    // variables
+    this.lives = 3; // starting player with 3 lives
     this.x = this.stateManager.width * 0.5 - this.width * 0.5;
     this.y = this.stateManager.height - this.height;
-    this.speed = 5;
   }
 
   render(context) {
     context.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+  reset() {
+    this.lives = 3; // starting player with 3 lives
+    this.x = this.stateManager.width * 0.5 - this.width * 0.5;
+    this.y = this.stateManager.height - this.height;
   }
 
   update() {
