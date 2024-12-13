@@ -20,7 +20,7 @@ class StateManager {
     // Enemy wave control
     this.enemySize = 60;
     this.enemyRaidGridColumns = 2;
-    this.enemyRaidGridRows = 12;
+    this.enemyRaidGridRows = 2;
     this.raids = [];
     this.raidCount = 1;
     this.newRaidSpawned = false;
