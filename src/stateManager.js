@@ -60,6 +60,16 @@ class StateManager {
     this.raids.push(new Raid(this));
   }
 
+  checkForAmmoHit(ammo, enemy) {
+    // using the 2d collision check for this
+    // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+    return (ammo.x < enemy.enemyPosX + this.enemySize &&
+      ammo.x + ammo.width > enemy.enemyPosX &&
+      ammo.y < enemy.enemyPosY + this.enemySize &&
+      ammo.y * ammo.height > enemy.enemyPosY
+    );
+  }
+
   render(context) {
     this.player.render(context);
     this.player.update();
