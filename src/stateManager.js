@@ -10,7 +10,6 @@ class StateManager {
     this.player = new Player(this);
 
     // game state variables
-    this.playerLives = 3; // starting player with 3 lives
     this.score = 0;
     this.gameOver = false;
 
@@ -21,7 +20,7 @@ class StateManager {
     // Enemy wave control
     this.enemySize = 60;
     this.enemyRaidGridColumns = 2;
-    this.enemyRaidGridRows = 2;
+    this.enemyRaidGridRows = 12;
     this.raids = [];
     this.raidCount = 1;
     this.newRaidSpawned = false;
@@ -47,12 +46,32 @@ class StateManager {
       if (e.key === 'w') {
         this.player.fireAmmo();
       }
+
+      // if user presses r and the game is over, restart the game 
+      if (e.key === 'r' || this.gameOver) {
+        this.restartGame();
+      }
     })
 
     // remove key from the active key list when key is no longer pressed
     window.addEventListener('keyup', (e) => {
       this.activeKeys = this.activeKeys.filter((key) => key != e.key)
     })
+  }
+
+  restartGame() {
+    this.player.reset();
+    this.score = 0;
+    this.gameOver = false;
+    this.availableAmmoPool = [];
+    this.raids = [];
+    this.raidCount = 1;
+    this.enemyRaidGridColumns = 2;
+    this.enemyRaidGridRows = 2;
+    this.newRaidSpawned = false;
+
+    this.startEnemyRaid();
+    this.createAmmoPool();
   }
 
   createAmmoPool() {
@@ -81,7 +100,7 @@ class StateManager {
 
     // there's a small chance of player life increasing after wave finish
     if (Math.random() < 0.1) {
-      this.playerLives++;
+      this.player.lives++;
     }
     this.newRaidSpawned = false;
   }
@@ -118,9 +137,9 @@ class StateManager {
     })
 
     // check for player's lives
-    if (this.playerLives <= 0) {
+    if (this.player.lives <= 0) {
       this.gameOver = true;
-      this.playerLives = 0;
+      this.player.lives = 0;
     }
 
     // show game stats
@@ -128,7 +147,7 @@ class StateManager {
     context.fillText("Score: " + this.score, 10, 30);
     context.fillText("Raid: " + this.raidCount, 10, 60);
     context.fillText("Lives: ", 10, 90);
-    for (let i = 0; i < this.playerLives; i++) {
+    for (let i = 0; i < this.player.lives; i++) {
       context.fillRect(53 + 10 * (i + 1), 75, 5, 15)
     }
 

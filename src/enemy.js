@@ -46,7 +46,7 @@ class Enemy {
 
     // check if enemy hit the player
     if (this.stateManager.checkEnemyCollision(this, this.stateManager.player)) {
-      this.stateManager.playerLives--;
+      this.stateManager.player.lives--;
       this.hitCounter++;
     }
   }
