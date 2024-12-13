@@ -9,6 +9,8 @@ class Enemy {
     // to the raid's x and y position
     this.offsetInRaidX = offsetInRaidX;
     this.offsetInRaidY = offsetInRaidY;
+
+    this.hitByAmmo = false;
   }
 
   render(context) {
@@ -19,6 +21,14 @@ class Enemy {
   progress(raidPosX, raidPosY) {
     this.enemyPosX = raidPosX + this.offsetInRaidX;
     this.enemyPosY = raidPosY + this.offsetInRaidY;
+
+    // check for collisions
+    this.stateManager.availableAmmoPool.forEach(ammo => {
+      if (!ammo.free && this.stateManager.checkForAmmoHit(ammo, this)) {
+        this.hitByAmmo = true;
+        ammo.reset();
+      }
+    })
   }
 }
 
