@@ -56,7 +56,7 @@ class Enemy {
       // check for collisions
       this.stateManager.availableAmmoPool.forEach(ammo => {
         if (!ammo.free && this.stateManager.checkEnemyCollision(this, ammo) && this.healthPoints > 0) {
-          this.onCollission(1);
+          this.onCollission(ammo.damage);
           ammo.reset();
           if (!this.stateManager.gameOver)
             this.stateManager.score += this.maxHealthPoints;
