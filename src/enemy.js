@@ -4,6 +4,7 @@ class Enemy {
     this.stateManager = stateManager;
     this.enemyPosX = 0;
     this.enemyPosY = 0;
+    this.noOfSprites = noOfSprites;
 
     // enemy health
     this.healthPoints = 1;

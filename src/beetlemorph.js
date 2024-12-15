@@ -11,10 +11,6 @@ export default class Beetlemorph extends Enemy {
     );
     this.image = document.getElementById("beetlemorph")
 
-    // the sprite sheet for beetlemorph has 4 types of characters
-    this.noOfSprites = 4;
-
-
     // the sprite sheet has multiple stages of how a damaged beetlemorph
     // might look like, in this case there are 3, normal, damaged and blasted
     // after all the frames are done, the enemy is removed from render
