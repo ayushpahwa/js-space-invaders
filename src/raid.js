@@ -7,11 +7,11 @@ class Raid {
     this.height = this.stateManager.enemyRaidGridRows * this.stateManager.enemySize;
     this.width = this.stateManager.enemyRaidGridColumns * this.stateManager.enemySize;
 
-    this.raidPosX = 0;
+    this.raidPosX = this.stateManager.width * 0.5 - this.width * 0.5;
     // start the raid above the screen
     this.raidPosY = -this.height;
 
-    this.speedX = 3;
+    this.speedX = Math.random() > 0.5 ? 1 : -1;
     this.speedY = 0;
 
     this.enemies = [];
