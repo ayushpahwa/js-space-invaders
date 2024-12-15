@@ -6,3 +6,9 @@
   translate: -50% -50%;
   background: url("assets/background.png");
 }
+
+#beetlemorph,
+#player_jets,
+#player {
+  display: none;
+}

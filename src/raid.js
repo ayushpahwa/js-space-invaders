@@ -1,4 +1,4 @@
-import Enemy from './enemy.js';
+import Beetlemorph from "./beetlemorph.js";
 
 class Raid {
   constructor(stateManager) {
@@ -7,11 +7,11 @@ class Raid {
     this.height = this.stateManager.enemyRaidGridRows * this.stateManager.enemySize;
     this.width = this.stateManager.enemyRaidGridColumns * this.stateManager.enemySize;
 
-    this.raidPosX = 0;
+    this.raidPosX = this.stateManager.width * 0.5 - this.width * 0.5;
     // start the raid above the screen
     this.raidPosY = -this.height;
 
-    this.speedX = 3;
+    this.speedX = Math.random() > 0.5 ? 1 : -1;
     this.speedY = 0;
 
     this.enemies = [];
@@ -22,7 +22,7 @@ class Raid {
   createEnemyRaid() {
     for (let y = 0; y < this.stateManager.enemyRaidGridRows; y++) {
       for (let x = 0; x < this.stateManager.enemyRaidGridColumns; x++) {
-        this.enemies.push(new Enemy(this.stateManager, x * this.stateManager.enemySize, y * this.stateManager.enemySize));
+        this.enemies.push(new Beetlemorph(this.stateManager, x * this.stateManager.enemySize, y * this.stateManager.enemySize));
       }
     }
   }
@@ -56,7 +56,7 @@ class Raid {
     })
 
     // check if the enemy is shot
-    this.enemies = this.enemies.filter(enemy => enemy.hitCounter < enemy.healthPoints);
+    this.enemies = this.enemies.filter(enemy => enemy.frameX <= enemy.maxFramesX);
   }
 }
 export default Raid;
