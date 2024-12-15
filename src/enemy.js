@@ -47,7 +47,7 @@ class Enemy {
       this.stateManager.gameOver = true;
     }
 
-    if (this.healthPoints == 0) {
+    if (this.healthPoints == 0 && this.stateManager.progressSpriteAnimation) {
       this.frameX++;
     }
 
@@ -55,7 +55,7 @@ class Enemy {
     if (!this.stateManager.gameOver) {
       // check for collisions
       this.stateManager.availableAmmoPool.forEach(ammo => {
-        if (!ammo.free && this.stateManager.checkEnemyCollision(this, ammo)) {
+        if (!ammo.free && this.stateManager.checkEnemyCollision(this, ammo) && this.healthPoints > 0) {
           this.onCollission(1);
           ammo.reset();
           if (!this.stateManager.gameOver)
