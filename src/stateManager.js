@@ -95,9 +95,9 @@ class StateManager {
 
   createNewRaid() {
     this.newRaidSpawned = true;
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.5 && this.enemyRaidGridColumns * this.enemySize <= 0.8 * this.width) {
       this.enemyRaidGridColumns++;
-    } else {
+    } else if (this.enemyRaidGridRows * this.enemySize <= 0.6 * this.height) {
       this.enemyRaidGridRows++;
     }
     this.startEnemyRaid();
