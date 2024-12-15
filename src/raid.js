@@ -56,7 +56,7 @@ class Raid {
     })
 
     // check if the enemy is shot
-    this.enemies = this.enemies.filter(enemy => enemy.frameX < enemy.maxFramesX);
+    this.enemies = this.enemies.filter(enemy => enemy.frameX <= enemy.maxFramesX);
   }
 }
 export default Raid;
