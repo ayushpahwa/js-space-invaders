@@ -18,7 +18,7 @@ class StateManager {
     this.maxAmmo = 15;
 
     // Enemy wave control
-    this.enemySize = 60;
+    this.enemySize = 80;
     this.enemyRaidGridColumns = 2;
     this.enemyRaidGridRows = 2;
     this.raids = [];
