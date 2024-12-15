@@ -18,12 +18,17 @@ class StateManager {
     this.maxAmmo = 15;
 
     // Enemy wave control
-    this.enemySize = 60;
+    this.enemySize = 80;
     this.enemyRaidGridColumns = 2;
     this.enemyRaidGridRows = 2;
     this.raids = [];
     this.raidCount = 1;
     this.newRaidSpawned = false;
+
+    // enemy sprite animation control
+    this.progressSpriteAnimation = false;
+    this.timeSinceLastSpriteAnimation = 0;
+    this.intervalForSpriteAnimation = 100;
 
 
     // init functions
@@ -48,7 +53,7 @@ class StateManager {
       }
 
       // if user presses r and the game is over, restart the game 
-      if (e.key === 'r' || this.gameOver) {
+      if (e.key === 'r' && this.gameOver) {
         this.restartGame();
       }
     })
@@ -90,9 +95,9 @@ class StateManager {
 
   createNewRaid() {
     this.newRaidSpawned = true;
-    if (Math.random() < 0.5) {
+    if (Math.random() < 0.5 && this.enemyRaidGridColumns * this.enemySize <= 0.8 * this.width) {
       this.enemyRaidGridColumns++;
-    } else {
+    } else if (this.enemyRaidGridRows * this.enemySize <= 0.6 * this.height) {
       this.enemyRaidGridRows++;
     }
     this.startEnemyRaid();
@@ -116,7 +121,18 @@ class StateManager {
     );
   }
 
-  render(context) {
+  render(context, deltaTimeForAnimation) {
+
+    // check if enemy sprite can be animated
+    if (this.timeSinceLastSpriteAnimation > this.intervalForSpriteAnimation) {
+      this.progressSpriteAnimation = true;
+      this.timeSinceLastSpriteAnimation = 0;
+    } else {
+      this.progressSpriteAnimation = false;
+      this.timeSinceLastSpriteAnimation += deltaTimeForAnimation;
+    }
+
+
     this.player.render(context);
 
     this.player.update();

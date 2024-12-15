@@ -1,17 +1,21 @@
 class Ammo {
   constructor(stateManager) {
-    this.width = 4;
-    this.height = 20;
+    this.width = 3;
+    this.height = 40;
     this.x = 0;
     this.y = 0;
     this.speed = 30;
     this.free = true;
     this.stateManager = stateManager;
+    this.damage = 1;
   }
 
   render(context) {
     if (!this.free) {
+      context.save();
+      context.fillStyle = "cyan";
       context.fillRect(this.x, this.y, this.width, this.height);
+      context.restore();
     }
   }
 
