@@ -48,7 +48,7 @@ class StateManager {
       }
 
       // if user presses r and the game is over, restart the game 
-      if (e.key === 'r' || this.gameOver) {
+      if (e.key === 'r' && this.gameOver) {
         this.restartGame();
       }
     })
