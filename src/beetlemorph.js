@@ -17,6 +17,5 @@ export default class Beetlemorph extends Enemy {
 
     this.maxHealthPoints = 1;
     this.healthPoints = 1;
-    this.hitCounter = 0;
   }
 }

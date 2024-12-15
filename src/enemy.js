@@ -5,8 +5,7 @@ class Enemy {
     this.enemyPosX = 0;
     this.enemyPosY = 0;
 
-    // enemy hits and health
-    this.hitCounter = 0;
+    // enemy health
     this.healthPoints = 1;
     this.maxHealthPoints = 1;
 
@@ -48,7 +47,7 @@ class Enemy {
       this.stateManager.gameOver = true;
     }
 
-    if (this.hitCounter > 0) {
+    if (this.healthPoints == 0) {
       this.frameX++;
     }
 
@@ -57,7 +56,7 @@ class Enemy {
       // check for collisions
       this.stateManager.availableAmmoPool.forEach(ammo => {
         if (!ammo.free && this.stateManager.checkEnemyCollision(this, ammo)) {
-          this.hitCounter++;
+          this.onCollission(1);
           ammo.reset();
           if (!this.stateManager.gameOver)
             this.stateManager.score += this.maxHealthPoints;
@@ -67,10 +66,14 @@ class Enemy {
     }
 
     // check if enemy hit the player
-    if (this.stateManager.checkEnemyCollision(this, this.stateManager.player)) {
+    if (this.stateManager.checkEnemyCollision(this, this.stateManager.player) && this.healthPoints > 0) {
+      this.onCollission(1);
       this.stateManager.player.lives--;
-      this.hitCounter++;
     }
+  }
+
+  onCollission(damage) {
+    this.healthPoints -= damage;
   }
 }
 
