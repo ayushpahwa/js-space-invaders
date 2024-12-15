@@ -1,6 +1,6 @@
 class Enemy {
 
-  constructor(stateManager, offsetInRaidX, offsetInRaidY) {
+  constructor(stateManager, offsetInRaidX, offsetInRaidY, noOfSprites) {
     this.stateManager = stateManager;
     this.enemyPosX = 0;
     this.enemyPosY = 0;
@@ -13,8 +13,7 @@ class Enemy {
     // the source image is a sheet of sprites, we only show a single frame at a time
     // the below variables control which frame is to be shown
     this.frameX = 0;
-    this.maxFramesX = 3;
-    this.frameY = 0;
+    this.frameY = Math.floor(Math.random() * noOfSprites)
 
     // the raid moves in a grid, the offset defines where the enemy is in the raid relative 
     // to the raid's x and y position
