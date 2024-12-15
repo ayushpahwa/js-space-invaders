@@ -16,14 +16,17 @@ window.addEventListener("load", function() {
 
   const stateManager = new StateManager(canvas);
 
-  function animate() {
+  let lastTime = 0;
+  function animate(timestamp) {
+    const deltaTimeForAnimaton = timestamp - lastTime;
+    lastTime = timestamp;
     // clear rect and paint the whole scene again
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    stateManager.render(ctx);
+    stateManager.render(ctx, deltaTimeForAnimaton);
     // recursively calls this function to re-draw the updated components
     window.requestAnimationFrame(animate);
   }
 
   // start the recursive loop for animation
-  animate();
+  animate(0);
 })

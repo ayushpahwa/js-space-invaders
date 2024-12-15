@@ -25,6 +25,11 @@ class StateManager {
     this.raidCount = 1;
     this.newRaidSpawned = false;
 
+    // enemy sprite animation control
+    this.progressSpriteAnimation = false;
+    this.timeSinceLastSpriteAnimation = 0;
+    this.intervalForSpriteAnimation = 100;
+
 
     // init functions
     this.startEnemyRaid();
@@ -116,7 +121,18 @@ class StateManager {
     );
   }
 
-  render(context) {
+  render(context, deltaTimeForAnimation) {
+
+    // check if enemy sprite can be animated
+    if (this.timeSinceLastSpriteAnimation > this.intervalForSpriteAnimation) {
+      this.progressSpriteAnimation = true;
+      this.timeSinceLastSpriteAnimation = 0;
+    } else {
+      this.progressSpriteAnimation = false;
+      this.timeSinceLastSpriteAnimation += deltaTimeForAnimation;
+    }
+
+
     this.player.render(context);
 
     this.player.update();
