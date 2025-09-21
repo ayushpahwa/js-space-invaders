@@ -7,13 +7,15 @@ session_root "~/Code/retro-game-space-invaders/"
 if initialize_session "js-invaders"; then
 
   new_window "editor"
-  new_window "dev"
+  new_window "live-server"
   new_window "gen-cmd"
 
-  select_window 2
-  run_cmd "http-server -o"
+  # Instructions for editor window
   select_window 1
   run_cmd "nvim"
+  # Instructions for live server window
+  select_window 2
+  run_cmd "http-server -o"
 
 fi
 
