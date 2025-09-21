@@ -16,7 +16,7 @@ The constructor here stores all the state variables and the keypress handlers.
     this.enemyRaidGridRows = 2;
     this.raids = [];
     this.raidCount = 1;
-    this.newRaidSpawned = false;
+    this.newRaidSpawning = false;
 ```
 - Once a raid is wiped by the player the size of either the rows or columns is increased by 1 on random.
 ```js
@@ -31,7 +31,7 @@ The constructor here stores all the state variables and the keypress handlers.
 
   // Spawn a new raid
   createNewRaid() {
-    this.newRaidSpawned = true;
+    this.newRaidSpawning = true;
 
     // A 50-50 probability to increment either the column or row of enemies in the
     // upcoming raid. Before increment, there is an upper limit check.
@@ -54,8 +54,8 @@ The constructor here stores all the state variables and the keypress handlers.
     if (Math.random() < 0.1) {
       this.player.lives++;
     }
-    this.newRaidSpawned = false;
+    this.newRaidSpawning = false;
   }
 ```
-- 
+-  
 

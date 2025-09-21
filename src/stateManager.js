@@ -23,7 +23,7 @@ class StateManager {
     this.enemyRaidGridRows = 2;
     this.raids = [];
     this.raidCount = 0;
-    this.newRaidSpawned = false;
+    this.newRaidSpawning = false;
 
     // enemy sprite animation control
     this.progressSpriteAnimation = false;
@@ -73,7 +73,7 @@ class StateManager {
     this.raidCount = 1;
     this.enemyRaidGridColumns = 2;
     this.enemyRaidGridRows = 2;
-    this.newRaidSpawned = false;
+    this.newRaidSpawning = false;
 
     this.startEnemyRaid();
     this.createAmmoPool();
@@ -91,7 +91,7 @@ class StateManager {
 
   // Create a new instance of the raid class and push to raids array
   // Also increase the raid count
-  // The raid will be created using the state variables for number of
+  // The raid will be created using the state variables for number of 
   // enemy rows and columns
   startEnemyRaid() {
     this.raids.push(new Raid(this));
@@ -100,7 +100,7 @@ class StateManager {
 
   // Spawn a new raid
   createNewRaid() {
-    this.newRaidSpawned = true;
+    this.newRaidSpawning = true;
 
     // A 50-50 probability to increment either the column or row of enemies in the
     // upcoming raid. Before increment, there is an upper limit check.
@@ -123,7 +123,7 @@ class StateManager {
     if (Math.random() < 0.1) {
       this.player.lives++;
     }
-    this.newRaidSpawned = false;
+    this.newRaidSpawning = false;
   }
 
   // check if ammo has hit enemy or enemy has hit player
@@ -162,7 +162,7 @@ class StateManager {
       }
       raid.render(context);
 
-      if (raid.enemies.length < 1 && !this.newRaidSpawned && !this.gameOver) {
+      if (raid.enemies.length < 1 && !this.newRaidSpawning && !this.gameOver) {
         raid.destroyed = true;
         this.createNewRaid();
       }
