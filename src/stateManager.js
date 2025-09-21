@@ -22,7 +22,7 @@ class StateManager {
     this.enemyRaidGridColumns = 2;
     this.enemyRaidGridRows = 2;
     this.raids = [];
-    this.raidCount = 1;
+    this.raidCount = 0;
     this.newRaidSpawned = false;
 
     // enemy sprite animation control
@@ -89,19 +89,35 @@ class StateManager {
     return this.availableAmmoPool.find((ammo) => ammo.free);
   }
 
+  // Create a new instance of the raid class and push to raids array
+  // Also increase the raid count
+  // The raid will be created using the state variables for number of
+  // enemy rows and columns
   startEnemyRaid() {
     this.raids.push(new Raid(this));
+    this.raidCount++;
   }
 
+  // Spawn a new raid
   createNewRaid() {
     this.newRaidSpawned = true;
+
+    // A 50-50 probability to increment either the column or row of enemies in the
+    // upcoming raid. Before increment, there is an upper limit check.
+    //
+    // Before increasing a column of enemies, check if the total width 
+    // of the raid (size of one enemy * total number of enemy columns) is less than 
+    // the 80% of the width of the screen
+    //
+    // Before increasing a row of enemies, check if the total height 
+    // of the raid (size of one enemy * total number of enemy rows) is less than 
+    // the 60% of the height of the screen
     if (Math.random() < 0.5 && this.enemyRaidGridColumns * this.enemySize <= 0.8 * this.width) {
       this.enemyRaidGridColumns++;
     } else if (this.enemyRaidGridRows * this.enemySize <= 0.6 * this.height) {
       this.enemyRaidGridRows++;
     }
     this.startEnemyRaid();
-    this.raidCount++;
 
     // there's a small chance of player life increasing after wave finish
     if (Math.random() < 0.1) {
