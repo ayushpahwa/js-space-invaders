@@ -37,7 +37,6 @@ js-space-invaders/
 - Using the canvas context, also sets the UI designs like font etc.
 - Imports and initiates the state manager class
 - Also initiates the animation loop using a recursive function
-
 ```js
   let lastTime = 0;
   function animate(timestamp) {
@@ -55,3 +54,4 @@ js-space-invaders/
   // start the recursive loop for animation
   animate(0);
 ```
+- This loop clears the viewing frame and the `render` function from state manager takes care of painting a frame again. 
