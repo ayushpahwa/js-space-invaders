@@ -41,6 +41,8 @@ js-space-invaders/
 ```js
   let lastTime = 0;
   function animate(timestamp) {
+    // We use the delta to control the speed of the sprite animations
+    // In our case, we have set the interval to 100 ms.
     const deltaTimeForAnimaton = timestamp - lastTime;
     lastTime = timestamp;
     // clear rect and paint the whole scene again
